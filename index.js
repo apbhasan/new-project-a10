@@ -10,7 +10,7 @@ const port = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
-// 🔹 এখন হার্ড-কোডেড স্ট্রিং না, .env থেকে নিচ্ছি
+// 🔹 এখন হার্ড-কোডেড স্ট্রিং
 const uri = process.env.MONGO_URI;
 
 const client = new MongoClient(uri, {
