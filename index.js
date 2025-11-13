@@ -27,7 +27,7 @@ app.get('/', (req, res) => {
 
 async function run() {
   try {
-    // create db + collection handles (lazy connect)
+    // create db + collectio
     const db = client.db('smart_db');
 
     // old collection (still usable if you need it)
