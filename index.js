@@ -27,10 +27,10 @@ app.get('/', (req, res) => {
 
 async function run() {
   try {
-    // create db + collectio
+    
     const db = client.db('smart_db');
 
-    // old collection (still usable if you need it)
+    
     const productsCollection = db.collection('products');
 
     // NEW collections for ARTIFY
