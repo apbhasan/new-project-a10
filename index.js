@@ -33,15 +33,11 @@ async function run() {
     
     const productsCollection = db.collection('products');
 
-    // NEW collections for ARTIFY
+    
     const artworksCollection = db.collection('artworks');
     const favoritesCollection = db.collection('favorites');
 
-    // =========================
-    //        PRODUCTS CRUD
-    // =========================
-
-    // GET: all products
+    
     app.get('/products', async (req, res) => {
       try {
         const products = await productsCollection.find().toArray();
@@ -52,7 +48,7 @@ async function run() {
       }
     });
 
-    // GET: single product by id
+    
     app.get('/products/:id', async (req, res) => {
       try {
         const id = req.params.id;
@@ -70,7 +66,7 @@ async function run() {
       }
     });
 
-    // POST: add a product
+    
     app.post('/products', async (req, res) => {
       try {
         const newProduct = req.body;
@@ -82,7 +78,7 @@ async function run() {
       }
     });
 
-    // PATCH: update a product by id (partial update)
+    
     app.patch('/products/:id', async (req, res) => {
       try {
         const id = req.params.id;
@@ -106,7 +102,7 @@ async function run() {
       }
     });
 
-    // DELETE: delete a product by id
+    
     app.delete('/products/:id', async (req, res) => {
       try {
         const id = req.params.id;
@@ -125,15 +121,11 @@ async function run() {
       }
     });
 
-    // =========================
-    //        ARTIFY CRUD
-    // =========================
-
-    // POST: add artwork
+    
     app.post('/artworks', async (req, res) => {
       try {
         const artwork = req.body;
-        // default fields
+        
         artwork.likes = artwork.likes || 0;
         artwork.createdAt = new Date();
 
@@ -145,14 +137,14 @@ async function run() {
       }
     });
 
-    // GET: all artworks (with filters: visibility, email, search, category)
+    
     app.get('/artworks', async (req, res) => {
       try {
         const { visibility, email, search, category } = req.query;
         const query = {};
 
         if (visibility) {
-          query.visibility = visibility; // "Public" or "Private"
+          query.visibility = visibility;
         }
         if (email) {
           query.userEmail = email;
@@ -179,7 +171,7 @@ async function run() {
       }
     });
 
-    // GET: 6 most recent public artworks (Featured)
+    
     app.get('/featured-artworks', async (req, res) => {
       try {
         const featured = await artworksCollection
@@ -195,7 +187,7 @@ async function run() {
       }
     });
 
-    // GET: single artwork by id
+    
     app.get('/artworks/:id', async (req, res) => {
       try {
         const id = req.params.id;
@@ -213,7 +205,7 @@ async function run() {
       }
     });
 
-    // PUT: update artwork by id (for My Gallery)
+    
     app.put('/artworks/:id', async (req, res) => {
       try {
         const id = req.params.id;
@@ -235,7 +227,7 @@ async function run() {
       }
     });
 
-    // DELETE: delete artwork by id
+    
     app.delete('/artworks/:id', async (req, res) => {
       try {
         const id = req.params.id;
@@ -254,11 +246,11 @@ async function run() {
       }
     });
 
-    // PATCH: like artwork (increase likes using $inc)
+    
     app.patch('/artworks/:id/like', async (req, res) => {
       try {
         const id = req.params.id;
-        const action = req.query.action || 'inc'; // 'inc' or 'dec' (optional)
+        const action = req.query.action || 'inc';
         const value = action === 'dec' ? -1 : 1;
 
         const filter = { _id: new ObjectId(id) };
@@ -277,14 +269,10 @@ async function run() {
       }
     });
 
-    // =========================
-    //        FAVORITES
-    // =========================
-
-    // POST: add to favorites
+    
     app.post('/favorites', async (req, res) => {
       try {
-        const favorite = req.body; // { userEmail, artworkId, artworkSnapshot }
+        const favorite = req.body; 
         favorite.addedAt = new Date();
 
         const result = await favoritesCollection.insertOne(favorite);
@@ -295,7 +283,7 @@ async function run() {
       }
     });
 
-    // GET: favorites by user email
+    
     app.get('/favorites', async (req, res) => {
       try {
         const { email } = req.query;
@@ -308,7 +296,7 @@ async function run() {
       }
     });
 
-    // DELETE: remove favorite by id
+    
     app.delete('/favorites/:id', async (req, res) => {
       try {
         const id = req.params.id;
@@ -327,11 +315,11 @@ async function run() {
       }
     });
 
-    // this will cause a lazy connection + ping
+    
     await client.db("admin").command({ ping: 1 });
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
   } finally {
-    // keeping client open so routes can use it
+    
   }
 }
 
