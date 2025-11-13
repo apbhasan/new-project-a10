@@ -6,11 +6,11 @@ require('dotenv').config();
 const app = express();
 const port = process.env.PORT || 3000;
 
-// middleware
+
 app.use(cors());
 app.use(express.json());
 
-// 🔹 এখন হার্ড-কোডেড স্ট্রিং
+
 const uri = process.env.MONGO_URI;
 
 const client = new MongoClient(uri, {
