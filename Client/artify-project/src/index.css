@@ -1,0 +1,51 @@
+@import "tailwindcss";
+@plugin "daisyui";
+ @plugin "daisyui" {
+   themes: light --default, dark --prefersdark;
+ }
+
+ /* index.css */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg: #f5f7fa;
+  --bg-alt: #ffffff;
+  --text: #111827;
+  --muted: #6b7280;
+  --accent: #22c55e;
+  --accent-dark: #16a34a;
+  --border: #e5e7eb;
+  --card-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
+}
+
+[data-theme="dark"] {
+  --bg: #020617;
+  --bg-alt: #020617;
+  --text: #e5e7eb;
+  --muted: #9ca3af;
+  --border: #1f2937;
+  --card-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Inter",
+    "Segoe UI", sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
